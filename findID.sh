@@ -1,5 +1,5 @@
 #!/bin/bash
-# station-lookup.sh v1.0 (restored working version with local config support)
+# station-lookup.sh v1.0
 
 #####################
 # Configuration
@@ -10,7 +10,7 @@ scriptName="$(basename "${BASH_SOURCE[0]}" .sh)"
 CONFIG_FILE="$scriptDir/${scriptName}.conf"
 
 # Dependencies check
-for dep in jq curl; do
+for dep in jq curl viu; do
   if ! command -v "$dep" &> /dev/null; then
     echo "Error: '$dep' is not installed."
     exit 1
