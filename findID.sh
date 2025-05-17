@@ -1,5 +1,5 @@
 #!/bin/bash
-# station-lookup.sh v1.0
+# station-lookup.sh v1.0 (restored working version with local config support)
 
 #####################
 # Configuration
@@ -90,13 +90,7 @@ while true; do
   responseCallSign=$(curl -s "http://${CHANNELS_DVR_IP}:${CHANNELS_DVR_PORT}/tms/stations/%22${stationQuery^^}%22")
 
   # Merge responses and remove duplicates
-  response=$(echo "$responseName" "$responseCallSign" | jq -s 'add | unique_by(.stationId)')$(curl -s "http://${CHANNELS_DVR_IP}:${CHANNELS_DVR_PORT}/tms/stations/${encodedStationName}")
-
-  if ! echo "$response" | jq empty &>/dev/null; then
-    echo "Error: Invalid JSON response"
-    echo "$response"
-    continue
-  fi
+  response=$(echo "$responseName" "$responseCallSign" | jq -s 'add | unique_by(.stationId)')
 
   count=$(echo "$response" | jq length)
   if [[ "$count" -eq 0 ]]; then
@@ -160,5 +154,4 @@ while true; do
       [[ "$choice" != [Yy]* ]] && break
     fi
   done
-
 done
