@@ -1,5 +1,5 @@
 #!/bin/bash
-# station-lookup.sh v1.1
+# findID.sh v1.1
 
 #####################
 # Configuration
